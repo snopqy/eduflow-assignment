@@ -1,0 +1,53 @@
+[
+  {
+    "_id": { "$oid": "653a1f9a2b8e3a1f4c9a1001" },
+    "title": "Python for Beginners 2024",
+    "description": "เรียนรู้พื้นฐาน Python ตั้งแต่เริ่มต้น เหมาะสำหรับผู้เรียนใหม่",
+    "content_type": "Video",
+    "status": "Published",
+    "creator": {
+      "user_id": 2,
+      "username": "ajarn_creator",
+      "email": "ajarn@example.com"
+    },
+    "category": "Programming & Tech",
+    "tags": ["Python", "Coding", "Beginner", "Tutorial"],
+    "interactions": {
+      "views": 1500,
+      "likes": 340
+    },
+    "comments": [
+      {
+        "comment_id": "cmt101",
+        "username": "somchai_learner",
+        "text": "สอนเข้าใจง่ายมากครับ ช่วยให้ริเริ่มเขียนโปรแกรมได้เลย",
+        "timestamp": "2023-10-25T10:30:00Z"
+      },
+      {
+        "comment_id": "cmt102",
+        "username": "jane_doe",
+        "text": "รอติดตามตอนต่อไปนะคะ มีประโยชน์มากค่ะ",
+        "timestamp": "2023-10-26T14:15:00Z"
+      }
+    ]
+  },
+  {
+    "_id": { "$oid": "653a1f9a2b8e3a1f4c9a1002" },
+    "title": "Introduction to Machine Learning",
+    "description": "เอกสาร PDF แนะนำแนวคิดของ Machine Learning เบื้องต้น",
+    "content_type": "PDF",
+    "status": "Draft",
+    "creator": {
+      "user_id": 2,
+      "username": "ajarn_creator",
+      "email": "ajarn@example.com"
+    },
+    "category": "Data Science & AI",
+    "tags": ["Machine Learning", "AI", "Data Science", "PDF"],
+    "interactions": {
+      "views": 45,
+      "likes": 12
+    },
+    "comments": []
+  }
+]

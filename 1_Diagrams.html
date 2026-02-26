@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFlow Diagram Viewer (Mermaid)</title>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f5f7fa; color: #333; }
+        .diagram-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 30px; overflow-x: auto; }
+        h1, h2 { color: #2c3e50; }
+        .instructions { background: #e8f4fd; padding: 15px; border-left: 4px solid #3498db; margin-bottom: 20px; border-radius: 4px; }
+        .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; font-family: monospace; white-space: pre-wrap; margin-top: 10px; font-size: 14px;}
+    </style>
+</head>
+<body>
+
+    <h1>EduFlow Architecture Diagrams</h1>
+    <div class="instructions">
+        <strong>คำแนะนำ:</strong> คุณสามารถแคปหน้าจอกราฟิกเหล่านี้เพื่อใช้ส่งงานได้เลย หรือหากต้องการแก้ไขใน <b>Draw.io</b> ให้ทำการคัดลอกโค้ดด้านล่างแต่ละส่วน แล้วไปที่ Draw.io เลือกเครื่องหมายบวก (+) > Advanced > Mermaid... แล้ววางโค้ดลงไป
+    </div>
+
+    <!-- ข้อ 1: Use Case Diagram -->
+    <div class="diagram-container">
+        <h2>1. Use Case Diagram</h2>
+        <p>Actors: Learner (ผู้เรียน), Content Creator (ผู้สร้างเนื้อหา)<br>Use Cases: 7 Use Cases</p>
+        <div class="mermaid">
+    flowchart LR
+        Learner((Learner))
+        Creator((Content Creator))
+
+        subgraph "EduFlow System"
+            UC1([1. Register & Login])
+            UC2([2. Search Content])
+            UC3([3. Access/View Content])
+            UC4([4. Comment on Content])
+            UC5([5. Upload Content])
+            UC6([6. Manage Content Details])
+            UC7([7. Change Content Status])
+        end
+
+        Learner --- UC1
+        Learner --- UC2
+        Learner --- UC3
+        Learner --- UC4
+
+        Creator --- UC1
+        Creator --- UC5
+        Creator --- UC6
+        Creator --- UC7
+
+        UC3 -. "&lt;&lt;include&gt;&gt;" .-> UC1
+        UC5 -. "&lt;&lt;include&gt;&gt;" .-> UC1
+        </div>
+        <details>
+            <summary>คลิกเพื่อดูโค้ดสำหรับนำไปใส่ใน Draw.io (Mermaid)</summary>
+            <div class="code-block">
+flowchart LR
+    Learner((Learner))
+    Creator((Content Creator))
+
+    subgraph "EduFlow System"
+        UC1([1. Register & Login])
+        UC2([2. Search Content])
+        UC3([3. Access/View Content])
+        UC4([4. Comment on Content])
+        UC5([5. Upload Content])
+        UC6([6. Manage Content Details])
+        UC7([7. Change Content Status])
+    end
+
+    Learner --- UC1
+    Learner --- UC2
+    Learner --- UC3
+    Learner --- UC4
+
+    Creator --- UC1
+    Creator --- UC5
+    Creator --- UC6
+    Creator --- UC7
+
+    UC3 -. "&lt;&lt;include&gt;&gt;" .-&gt; UC1
+    UC5 -. "&lt;&lt;include&gt;&gt;" .-&gt; UC1
+            </div>
+        </details>
+    </div>
+
+    <!-- ข้อ 2: ER Diagram -->
+    <div class="diagram-container">
+        <h2>2. ER Diagram (Entity-Relationship)</h2>
+        <p>Entities: User, Content, Category, Comment (4 Entities, >= 4 Attributes per entity)</p>
+        <div class="mermaid">
+    erDiagram
+        USER {
+            int user_id PK
+            string username
+            string email
+            string password_hash
+            string role
+        }
+        
+        CONTENT {
+            int content_id PK
+            string title
+            string description
+            string content_type
+            string status
+            int creator_id FK
+            int category_id FK
+        }
+        
+        CATEGORY {
+            int category_id PK
+            string category_name
+            string description
+            timestamp created_at
+        }
+        
+        COMMENT {
+            int comment_id PK
+            text comment_text
+            timestamp created_at
+            int user_id FK
+            int content_id FK
+        }
+
+        USER ||--o{ CONTENT : "creates"
+        USER ||--o{ COMMENT : "writes"
+        CATEGORY ||--o{ CONTENT : "categorizes"
+        CONTENT ||--o{ COMMENT : "has"
+        </div>
+        <details>
+            <summary>คลิกเพื่อดูโค้ดสำหรับนำไปใส่ใน Draw.io (Mermaid)</summary>
+            <div class="code-block">
+erDiagram
+    USER {
+        int user_id PK
+        string username
+        string email
+        string password_hash
+        string role
+    }
+    
+    CONTENT {
+        int content_id PK
+        string title
+        string description
+        string content_type
+        string status
+        int creator_id FK
+        int category_id FK
+    }
+    
+    CATEGORY {
+        int category_id PK
+        string category_name
+        string description
+        timestamp created_at
+    }
+    
+    COMMENT {
+        int comment_id PK
+        text comment_text
+        timestamp created_at
+        int user_id FK
+        int content_id FK
+    }
+
+    USER ||--o{ CONTENT : "creates"
+    USER ||--o{ COMMENT : "writes"
+    CATEGORY ||--o{ CONTENT : "categorizes"
+    CONTENT ||--o{ COMMENT : "has"
+            </div>
+        </details>
+    </div>
+
+    <!-- ข้อ 3: Class Diagram -->
+    <div class="diagram-container">
+        <h2>3. Class Diagram</h2>
+        <p>แปลงจาก ER Diagram, เพิ่ม Cardinality, Methods (>= 3 methods / class)</p>
+        <div class="mermaid">
+    classDiagram
+        class User {
+            -int user_id
+            -string username
+            -string email
+            -string password
+            -string role
+            +register(email, password, role) bool
+            +login(email, password) bool
+            +editProfile(newData) void
+            +recoverPassword(email) void
+        }
+        
+        class Content {
+            -int content_id
+            -string title
+            -string description
+            -string content_type
+            -string status
+            +uploadContent(file) bool
+            +updateDetails(data) void
+            +changeStatus(newStatus) void
+            +deleteContent() bool
+        }
+        
+        class Category {
+            -int category_id
+            -string category_name
+            -string description
+            +createCategory(name, desc) Category
+            +getAllCategories() list~Category~
+            +getCategoryDetails() string
+        }
+        
+        class Comment {
+            -int comment_id
+            -string text
+            -timestamp created_at
+            +addComment(user, content, text) bool
+            +deleteComment() bool
+            +editComment(newText) void
+        }
+
+        User "1" --> "0..*" Content : creates >
+        User "1" --> "0..*" Comment : writes >
+        Category "1" --> "0..*" Content : categorizes >
+        Content "1" --> "0..*" Comment : contains >
+        </div>
+        <details>
+            <summary>คลิกเพื่อดูโค้ดสำหรับนำไปใส่ใน Draw.io (Mermaid)</summary>
+            <div class="code-block">
+classDiagram
+    class User {
+        -int user_id
+        -string username
+        -string email
+        -string password
+        -string role
+        +register(email, password, role) bool
+        +login(email, password) bool
+        +editProfile(newData) void
+        +recoverPassword(email) void
+    }
+    
+    class Content {
+        -int content_id
+        -string title
+        -string description
+        -string content_type
+        -string status
+        +uploadContent(file) bool
+        +updateDetails(data) void
+        +changeStatus(newStatus) void
+        +deleteContent() bool
+    }
+    
+    class Category {
+        -int category_id
+        -string category_name
+        -string description
+        +createCategory(name, desc) Category
+        +getAllCategories() list~Category~
+        +getCategoryDetails() string
+    }
+    
+    class Comment {
+        -int comment_id
+        -string text
+        -timestamp created_at
+        +addComment(user, content, text) bool
+        +deleteComment() bool
+        +editComment(newText) void
+    }
+
+    User "1" --&gt; "0..*" Content : creates &gt;
+    User "1" --&gt; "0..*" Comment : writes &gt;
+    Category "1" --&gt; "0..*" Content : categorizes &gt;
+    Content "1" --&gt; "0..*" Comment : contains &gt;
+            </div>
+        </details>
+    </div>
+</body>
+</html>
